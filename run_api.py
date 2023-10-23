@@ -1,5 +1,8 @@
 import os
 from typing import List
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import uvicorn
 from fastapi import FastAPI
@@ -40,8 +43,9 @@ def _set_env():
         key.strip("'"): value.strip("\n")
         for key, value in [(i.split("=")) for i in env_file]
     }
-    os.environ["OPENAI_API_KEY"] = envs_dict["OPENAI_API_KEY"]
-
+    #os.environ["OPENAI_API_KEY"] = envs_dict["OPENAI_API_KEY"]
+    #openai.api_key = os.getenv('GPT3_OPENAI_KEY')
+    os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
 
 if __name__ == "__main__":
     _set_env()
